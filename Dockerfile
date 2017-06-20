@@ -42,7 +42,7 @@ RUN rm -rf ${HUBOT_DIR}/hubot-scripts.json
 
 # allow custom scripts to be included / overwritten by user
 VOLUME ${HUBOT_DIR}/scripts
-
+RUN npm install hubot-slack --save
 CMD node -e "console.log(JSON.stringify('$EXTERNAL_SCRIPTS'.split(',')))" > external-scripts.json && \
 	npm install $(node -e "console.log('$EXTERNAL_SCRIPTS'.split(',').join(' '))") && \
 	bin/hubot -a ${HUBOT_ADAPTER}
